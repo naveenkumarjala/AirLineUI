@@ -1,0 +1,90 @@
+<h3 class="heading-report"> Ticket Details</h3>
+<form [formGroup]="ticketmodel.formbookingGroup">
+    <div class="row align-items-center">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-label">Ticket ID /BookingId: <span style="color:red">*</span></label>
+                <input type="text" placeholder="Ticket ID/BookingId" [(ngModel)]="ticketmodel.ticketID"
+                    formControlName="userNameControl" class="form-control">
+            </div>
+            <div style="color:red;" *ngIf="ticketmodel.formbookingGroup.dirty"
+                [hidden]="!(hasError('required','userNameControl'))">
+                Ticket ID Requried
+            </div>
+        </div>
+        <div class="col-md-12" style="text-align: center;">
+            <input type="submit" value="Check Ticket" [disabled]="!(ticketmodel.formbookingGroup.valid)"
+                (click)="GetTicketDetails()" class="btn btn-danger">
+        </div>
+    </div>
+</form>
+<div class="container" id="component1" style="margin-top: 20px;">
+    <div class="row" *ngFor="let ticket of ticketModels">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+
+            <div class="card text-center">
+                <div class="card-header" style="background: linear-gradient(to right, #6270be, #6270be);">
+                    <h5 class="card-title" style="color: white;"> Ticket Details </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">Ticket
+                            ID</div>
+                        <div class="col-md-3" style="font-weight:bold">{{ticket.ticketID}}</div>
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">Booking
+                            ID</div>
+                        <div class="col-md-3" style="font-weight:bold"> {{ticket.bookingID}}</div>
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">Flight
+                            Number</div>
+                        <div class="col-md-3" style="font-weight:bold">{{ticket.flightNumber}}</div>
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">Date Of
+                            Boarding</div>
+                        <div class="col-md-3" style="font-weight:bold"> {{ticket.dateOfJourney}}</div>
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">Boarding
+                            Time</div>
+                        <div class="col-md-3" style="font-weight:bold">{{ticket.boardingTime}}</div>
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">Ticket
+                            Status
+                        </div>
+                        <div class="col-md-3" style="font-weight:bold"> {{ticket.statusstr}}</div>
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">From
+                            Place</div>
+                        <div class="col-md-3" style="font-weight:bold"> {{ticket.fromPlace}}</div>
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">To Place
+                        </div>
+                        <div class="col-md-3" style="font-weight:bold">{{ticket.toPlace}}</div>
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">Ticket
+                            Type</div>
+                        <div class="col-md-3" style="font-weight:bold"> {{ticket.ticketType}}</div>
+
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">
+                            Passenger Name</div>
+                        <div class="col-md-3" style="font-weight:bold"> {{ticket.userName}}</div>
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">Pass
+                            Port Number</div>
+                        <div class="col-md-3" style="font-weight:bold"> {{ticket.passportNumber}}</div>
+
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">age
+                        </div>
+                        <div class="col-md-3" style="font-weight:bold"> {{ticket.age}}</div>
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">Seat
+                            Number</div>
+                        <div class="col-md-3" style="font-weight:bold"> {{ticket.seatNumber}}</div>
+                        <div class="col-md-3" style="background: linear-gradient(to right, #e4e7f9, #ffdede); ">Email
+                        </div>
+                        <div class="col-md-3" style="font-weight:bold"> {{ticket.emailID}}</div>
+                    </div>
+                </div>
+                <div class="card-footer"  style="background: linear-gradient(to right, #6270be, #6270be);">
+                    <input type="button" *ngIf = "ticket.status == 0" value="Cancel Ticket" class="btn btn-danger" (click)="cancelTicket(ticket)" />
+                     &NonBreakingSpace; &NonBreakingSpace;&NonBreakingSpace;<input type="button"  value="Print Ticket" class="btn btn-danger" (click)="printComponent()" />
+                
+                </div>
+
+                <!-- <button (click)="printComponent(component1)">Print</button> -->
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
