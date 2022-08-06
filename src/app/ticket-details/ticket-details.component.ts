@@ -3,6 +3,8 @@ import { ticketService } from '../services/ticket.serve';
 import { TicketData, Ticket } from '../models/ticketData';
 import { AuthService } from '../services/login.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-ticket-details',
@@ -52,9 +54,22 @@ export class TicketDetailsComponent implements OnInit {
   }
   printComponent() {
     
-    window.print();
+    this.openPDF();
     
 }
+public openPDF(): void {
+  let DATA: any = document.getElementById('htmlData');
+  html2canvas(DATA).then((canvas) => {
+    let fileWidth = 208;
+    let fileHeight = (canvas.height * fileWidth) / canvas.width;
+    const FILEURI = canvas.toDataURL('image/png');
+    let PDF = new jsPDF('p', 'mm', 'a4');
+    let position = 0;
+    PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+    PDF.save('FlightTicket.pdf');
+  });
+}
+
   cancelTicket(input: TicketData) {
     debugger;
     if (input.status == 1) {
